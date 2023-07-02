@@ -45,4 +45,17 @@ public class RegistrarAPI {
             return  new ResponseEntity<>("no data",HttpStatus.BAD_REQUEST);
         }
     }
+    @PutMapping("/update{Registrar}")
+    public  ResponseEntity<?> updateRegistrar(@PathVariable int RegistrarID,@RequestBody Registrar registrar){
+        try {
+            if (registrarRepository.findById(RegistrarID).isPresent()){
+                Registrar registrar1 = registrarRepository.save(registrar);
+                return new ResponseEntity<>("data is updated",HttpStatus.OK);
+            }else {
+                return new ResponseEntity<>("data is not updated",HttpStatus.NOT_FOUND);
+            }
+        }catch (Exception exception){
+            return  new ResponseEntity<>("UnSuccess",HttpStatus.BAD_REQUEST);
+        }
+    }
 }

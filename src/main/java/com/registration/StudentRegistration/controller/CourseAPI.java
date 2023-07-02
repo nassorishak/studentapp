@@ -48,4 +48,17 @@ public class CourseAPI {
             return  new ResponseEntity<>("no Data",HttpStatus.BAD_REQUEST);
         }
   }
+  @PutMapping("/update{CourseID}")
+    public  ResponseEntity<?> updateCourse(@PathVariable int CourseID,@RequestBody Course course){
+        try {
+            if (courseRepository.findById(CourseID).isPresent()){
+                Course course1 = courseRepository.save(course);
+                return  new ResponseEntity<>("data is updated",HttpStatus.OK);
+            }else {
+                return new ResponseEntity<>("data not updated",HttpStatus.BAD_REQUEST);
+            }
+        }catch (Exception exception){
+            return  new ResponseEntity<>("data is unUpdated",HttpStatus.BAD_REQUEST);
+        }
+  }
 }

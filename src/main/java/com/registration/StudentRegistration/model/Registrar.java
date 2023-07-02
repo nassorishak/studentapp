@@ -24,4 +24,8 @@ public class Registrar {
     @Column(name="RegistrarPassword")
     private int RegistrarPassword;
 
+//    @ManyToOne
+//    @JoinColumn(name="RegistreesID")
+//    private Registrees registrees;
+
 }

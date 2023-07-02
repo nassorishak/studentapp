@@ -21,4 +21,18 @@ public class Requirement {
     private  int CourseID;
     @Column(name="StudentID")
     private  int StudentID;
+    @Column(name="RegistreesID")
+    private int RegistreesID;
+
+
+
+
+
+
+//    @OneToOne
+//    @JoinColumn(name="RegistreesID")
+//    private Registrees registrees;
+
+
+
 }

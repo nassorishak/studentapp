@@ -47,4 +47,17 @@ public class RegistreesAPI {
             return  new ResponseEntity<>("no data",HttpStatus.BAD_REQUEST);
         }
     }
+    @PutMapping("/update{Registrees}")
+    public  ResponseEntity<?> updateRegistrees(@PathVariable int RegistreesID,@RequestBody Registrees registrees){
+        try {
+            if (registreesRepository.findById(RegistreesID).isPresent()){
+                Registrees registrees1 = registreesRepository.save(registrees);
+                return  new ResponseEntity<>("data id updated",HttpStatus.BAD_REQUEST);
+            }else {
+                return  new ResponseEntity<>("data id not updated",HttpStatus.NOT_FOUND);
+            }
+        }catch (Exception exception){
+            return  new ResponseEntity<>("no data updated",HttpStatus.BAD_REQUEST);
+        }
+    }
 }

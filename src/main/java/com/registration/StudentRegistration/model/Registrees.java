@@ -19,4 +19,16 @@ public class Registrees {
     private String RegistreesAddress;
     @Column(name="RegistreesPhoneNumber")
     private int RegistreesPhoneNumber;
+    private  int StudentID;
+//    private  int RequirementID;
+
+
+
+   @OneToOne
+    @JoinColumn(name="RequirementID")
+   private Requirement requirement;
+
+    @ManyToOne
+    @JoinColumn(name="CourseID")
+    private Course course;
 }

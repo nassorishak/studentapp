@@ -9,15 +9,21 @@ import lombok.Data;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int StudentID;
+    public int StudentID;
     @Column(name="StudentName")
-    private String StudentName;
+    public String StudentName;
     @Column(name="StudentEmail")
-    private String StudentEmail;
+    public String StudentEmail;
     @Column(name="StudentGender")
-    private String StudentGender;
+    public String StudentGender;
     @Column(name="StudentAddress")
-    private String StudentAddress;
+    public String StudentAddress;
     @Column(name="StudentPhoneNumber")
-    private int studentPhoneNumber;
+    public int StudentPhoneNumber;
+    @Column(name="CourseID")
+    public   int CourseID;
+
+//    @ManyToOne
+//    @JoinColumn(name="RegistrarID")
+//    public Registrar registrar;
 }

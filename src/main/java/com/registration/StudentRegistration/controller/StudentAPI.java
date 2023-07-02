@@ -57,11 +57,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 @RestController
 @RequestMapping("/all")
+@CrossOrigin(origins = "http://localhost:3000")
 public class StudentAPI {
     @Autowired
     public StudentRepository studentRepository;
@@ -89,7 +91,7 @@ public class StudentAPI {
         }
 
     }
-    @DeleteMapping("/delete{StudentID}")
+    @DeleteMapping("/delete/{StudentID}")
     public  ResponseEntity<?> deleted(@PathVariable int StudentID){
         try {
             studentRepository.deleteById(StudentID);
@@ -98,4 +100,35 @@ public class StudentAPI {
             return  new ResponseEntity<>("data UnSuccess", BAD_REQUEST);
         }
 }
+
+    @PutMapping("/update/{StudentID}")
+    public ResponseEntity<?> updateStudent(@PathVariable int StudentID, @RequestBody Student student){
+        try {
+            if(studentRepository.findById(StudentID).isPresent()){
+                Student student1 = studentRepository.save(student);
+                return new ResponseEntity<>("Updated SuccessFull", HttpStatus.OK);
+
+            }else {
+                return new ResponseEntity<>("Student Not Found",HttpStatus.NOT_FOUND);
+            }
+        }catch (Exception exception){
+            return new ResponseEntity<>("Network Error", BAD_REQUEST);
+        }
+    }
+
+
+    @GetMapping("/byId/{StudentID}")
+    public ResponseEntity<?> getByID(@PathVariable int StudentID){
+        try {
+            Optional<Student> optionalStudent = studentRepository.findById(StudentID);
+
+            if(optionalStudent.isPresent()){
+                return new ResponseEntity<>(optionalStudent, HttpStatus.OK);
+            }else {
+                return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
+            }
+        }catch (Exception exception){
+            return new ResponseEntity<>("Network Error", HttpStatus.CONFLICT);
+        }
+    }
 }

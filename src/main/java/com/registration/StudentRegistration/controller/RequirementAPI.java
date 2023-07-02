@@ -47,4 +47,18 @@ public class RequirementAPI {
             return  new ResponseEntity<>("Success",HttpStatus.BAD_REQUEST);
         }
     }
+    @PutMapping("/update/{RequirementID}")
+    public ResponseEntity<?> updateRequirement(@PathVariable int RequirementID,@RequestBody Requirement requirement){
+        try {
+            if (requirementRepository.findById(RequirementID).isPresent()){
+                Requirement requirement1 = requirementRepository.save(requirement);
+                return  new ResponseEntity<>("data updated",HttpStatus.OK);
+
+            }else {
+                return  new ResponseEntity<>("data not updated",HttpStatus.NOT_FOUND);
+            }
+        }catch (Exception exception){
+            return  new ResponseEntity<>("wrong data",HttpStatus.BAD_REQUEST);
+        }
+    }
 }

@@ -17,4 +17,15 @@ public class Course {
     private int CourseCode;
     @Column(name="CourseGrade")
     private  int CourseGrade;
+    private  int RegistreesID;
+
+    @ManyToOne
+    @JoinColumn(name="RegistrarID")
+    private Registrar registrar;
+
+    @ManyToOne
+    @JoinColumn(name="RequirementID")
+    private Requirement requirement;
+
+
 }
